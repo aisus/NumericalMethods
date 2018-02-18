@@ -1,7 +1,9 @@
 # Вычисляет f(x)=0 методом половинного деления
 def compute(f, a, b, eps):
     c = (a+b) / 2
-    while abs(a-b) > eps or f.value(c) > eps:
+    i = 0
+    while abs(a-b) > eps:
+        i += 1
         if f.value(c) == 0:
             return c
         elif f.value(a) * f.value(c) < 0:
@@ -9,4 +11,4 @@ def compute(f, a, b, eps):
         else:
             a = c
         c = (a + b) / 2.0
-    return c
+    return c, i

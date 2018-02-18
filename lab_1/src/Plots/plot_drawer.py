@@ -2,14 +2,16 @@ import matplotlib.pyplot as plot_drawer
 
 
 # Рисует график
-def createPlot(f):
+def create_plot(f, x0, xn, n):
 
     x = []
     y = []
 
-    for point in f.points:
-        x.append(point.x)
-        y.append(point.y)
+    step = (xn - x0) / n
+    while x0 < xn:
+        x.append(x0)
+        y.append(f.value(x0))
+        x0 += step
 
     # Сама функция
     plot_drawer.plot(x, y, 'b')
