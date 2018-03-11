@@ -1,3 +1,5 @@
+import math
+
 from Functions import task_two_functions as f
 from NumericalMethods import newton_method_system
 import matplotlib.pyplot as pyplot
@@ -42,9 +44,8 @@ def create_plot(x0, xn, n):
     step = (xn - x0) / n
     while x0 < xn:
         x.append(x0)
-        y = f.value(x0)
-        y0.append(y[0])
-        y1.append(y[1])
+        y0.append(math.sin(x0+0.5)-1)
+        y1.append(-math.cos(x0-2))
         x0 += step
 
     # Первая функция

@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60abc596-90a9-4039-911f-e48530e9539f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/lab_1/src/Functions/task_one_function.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/lab_1/src/Functions/task_two_functions.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/lab_1/src/NumericalMethods/newton_method_system.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/lab_1/src/Tasks/task_two.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lab_1/src/Functions/functions.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lab_1/src/NumericalMethods/bisection_method.py" afterPath="$PROJECT_DIR$/lab_1/src/NumericalMethods/bisection_method.py" />
-      <change beforePath="$PROJECT_DIR$/lab_1/src/NumericalMethods/secant_method.py" afterPath="$PROJECT_DIR$/lab_1/src/NumericalMethods/secant_method.py" />
-      <change beforePath="$PROJECT_DIR$/lab_1/src/Plots/plot_drawer.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lab_1/src/Tasks/task_one.py" afterPath="$PROJECT_DIR$/lab_1/src/Tasks/task_one.py" />
+      <change beforePath="$PROJECT_DIR$/lab_1/src/Functions/task_two_functions.py" afterPath="$PROJECT_DIR$/lab_1/src/Functions/task_two_functions.py" />
+      <change beforePath="$PROJECT_DIR$/lab_1/src/NumericalMethods/newton_method_system.py" afterPath="$PROJECT_DIR$/lab_1/src/NumericalMethods/newton_method_system.py" />
+      <change beforePath="$PROJECT_DIR$/lab_1/src/Tasks/task_two.py" afterPath="$PROJECT_DIR$/lab_1/src/Tasks/task_two.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/lab_1/src/Functions/task_two_functions.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="224">
-              <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+              <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -37,8 +31,8 @@
       <file leaf-file-name="newton_method_system.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lab_1/src/NumericalMethods/newton_method_system.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="295">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -49,10 +43,10 @@
       <file leaf-file-name="task_two.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lab_1/src/Tasks/task_two.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1869">
-              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state relative-caret-position="186">
+              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding>
-                <element signature="e#0#45#0" expanded="true" />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,8 +81,8 @@
         <option value="$PROJECT_DIR$/lab_1/src/Plots/plot_drawer.py" />
         <option value="$PROJECT_DIR$/lab_1/src/Tasks/task_one.py" />
         <option value="$PROJECT_DIR$/lab_1/src/Tasks/task_two.py" />
-        <option value="$PROJECT_DIR$/lab_1/src/Functions/task_two_functions.py" />
         <option value="$PROJECT_DIR$/lab_1/src/NumericalMethods/newton_method_system.py" />
+        <option value="$PROJECT_DIR$/lab_1/src/Functions/task_two_functions.py" />
       </list>
     </option>
   </component>
@@ -314,7 +308,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36770833" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36770833" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -345,8 +339,13 @@
           <line>16</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lab_1/src/NumericalMethods/newton_method_system.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="26" />
+      <option name="time" value="27" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -384,7 +383,7 @@
         <state relative-caret-position="575">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -444,7 +443,7 @@
         <state relative-caret-position="322">
           <caret line="16" column="58" lean-forward="true" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -508,7 +507,7 @@
         <state relative-caret-position="621">
           <caret line="29" column="38" lean-forward="true" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -754,10 +753,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lab_1/src/Tasks/task_two.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1869">
-          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        <state relative-caret-position="186">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -765,7 +764,7 @@
     <entry file="file://$PROJECT_DIR$/lab_1/src/Functions/task_two_functions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
-          <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -774,8 +773,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lab_1/src/NumericalMethods/newton_method_system.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="295">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
