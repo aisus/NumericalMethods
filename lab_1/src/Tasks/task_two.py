@@ -24,11 +24,18 @@ def run():
         x0 = float(input("    Начальное приближение, x: "))
         y0 = float(input("    Начальное приближение, y: "))
 
-        print('Метод Ньютона для системы')
-        x, i = newton_method_system.compute(x0, y0, 10 ** eps_power_of_ten)
+        print('Стандартный метод Ньютона для системы')
+        x, i = newton_method_system.compute_standart(x0, y0, 10 ** eps_power_of_ten)
 
         print('    Результат: x =', x)
-        # print('    Невязка: ', round(abs(f.value(x)), abs(eps_power_of_ten) + 1))
+        print('    Невязка: ', abs(f.value(x)[0] - f.value(x)[1]))
+        print('    Число итераций: ', i)
+
+        print('Модифицированный метод Ньютона для системы')
+        x, i = newton_method_system.compute_modified(x0, y0, 10 ** eps_power_of_ten)
+
+        print('    Результат: x =', x)
+        print('    Невязка: ', abs(f.value(x)[0] - f.value(x)[1]))
         print('    Число итераций: ', i)
 
         ans = input('Завершить работу? (y/n) ')
@@ -46,6 +53,7 @@ def create_plot(x0, xn, n):
         x.append(x0)
         y0.append(math.sin(x0+0.5)-1)
         y1.append(-math.cos(x0-2))
+        # y1.append(math.acos(-x0)-2)
         x0 += step
 
     # Первая функция
