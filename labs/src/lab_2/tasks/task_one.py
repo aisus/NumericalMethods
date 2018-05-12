@@ -258,9 +258,9 @@ def lagrange_error(x):
 def spline_error(x, spline_xy):
     x_err = []
     y_err = []
-    for i in range(0, len(x)):
-        y_err.append(abs(f(i) - spline_xy[1][i]))
-        x_err.append(x[i])
+    for i in range(0, len(spline_xy[0])):
+        y_err.append(abs(f(spline_xy[0][i]) - spline_xy[1][i]))
+        x_err.append(spline_xy[0][i])
 
     return x_err, y_err
 
@@ -278,14 +278,6 @@ def run():
     y = []
 
     tabulated_function_values(a, b, h, x, y)
-
-    x_err = []  # табул. массив х с шагом для оценки погрешности
-    y_err = []  # табул. массив у с шагом для оценки погрешности
-
-    tabulated_function_values(a, b, 0.001, x_err, y_err)
-
-    # print(x)
-    # print(y)
 
     newt = []
     lag = []
@@ -305,37 +297,13 @@ def run():
     poly_plot(x[0], x[-1], y, lag, newt)
     spline_plot(x[0], x[-1], y, X_Y_lin_sp, X_Y_parabol_sp, X_Y_cub_sp)
 
-    error_lagrange = lagrange_error(x_err)
-    error_newton = newton_error(x_err)
-    error_lin = spline_error(x_err, X_Y_lin_sp)
-    error_parab = spline_error(x_err, X_Y_parabol_sp)
-    error_cub = spline_error(x_err, X_Y_cub_sp)
+    error_lagrange = lagrange_error(x)
+    error_newton = newton_error(x)
+    error_lin = spline_error(x, X_Y_lin_sp)
+    error_parab = spline_error(x, X_Y_parabol_sp)
+    error_cub = spline_error(x, X_Y_cub_sp)
 
     error_plot(error_lagrange, error_newton, error_lin, error_parab, error_cub)
-
-    # x_source = np.linspace(a, b, n)
-    # fx = tabulated_function_values(x_source)
-    #
-    # x_interp = np.linspace(a, b, n)
-    #
-    # lagrange_result = np.zeros(len(x_interp))
-    # for i in range(len(x_interp)):
-    #     lagrange_result[i] = lagrange(x_interp[i], x_source)
-    #
-    # newton_result = np.zeros(len(x_interp))
-    # for i in range(len(x_interp)):
-    #     newton_result[i] = newton(x_interp[i], x_source)
-    #
-    # poly_plot(a, b, fx, lagrange_result, newton_result)
-    #
-    # linear_spline_result = np.zeros(len(x_interp))
-    # for i in range(len(x_interp)):
-    #     linear_spline_result[i] = linear_spline(x_interp[i], x_source)
-
-    # print('x', x_source)
-    # print('fx', fx)
-    # print('lagrange_result', lagrange_result)
-    # print('newton_result', newton_result)
 
 
 if __name__ == '__main__':
