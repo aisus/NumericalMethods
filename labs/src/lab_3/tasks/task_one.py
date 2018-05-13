@@ -30,27 +30,39 @@ def source_function_plot(a, b, n):
     pl.show()
 
 
-def trapezoidal_integration(a, b, n):
-    h = (b - a) / n
-    res = 0.5 * (f(a) + f(b))
-    for i in range(1, n):
-        res += f(a + i * h)
-    return h * res
+def ddf_plot(a, b):
+    pl.figure("ddf")
+    i = np.linspace(a, b, 100)
+
+    m2 = []
+    for j in range(100):
+        m2.append(ddf(i[j]))
+
+    pl.plot(i, m2, 'purple', label='ddf')
+    pl.legend()
+    pl.grid()
+    pl.show()
+
+# def trapezoidal_integration(a, b, n):
+#     h = (b - a) / n
+#     res = 0.5 * (f(a) + f(b))
+#     for i in range(1, n):
+#         res += f(a + i * h)
+#     return h * res
+#
+#
+# def trapezoidal_integration_with_precision(a, b, eps):
+#     n = 0
+#     prev_res = float('inf')
+#     res = 0
+#     while abs(prev_res - res) > eps:
+#         n += 1
+#         prev_res = res
+#         res = trapezoidal_integration(a, b, n)
+#     return res
 
 
-def trapezoidal_integration_with_precision(a, b, eps):
-    n = 0
-    prev_res = float('inf')
-    res = 0
-    while abs(prev_res - res) > eps:
-        n += 1
-        prev_res = res
-        res = trapezoidal_integration(a, b, n)
-    # print('Trap. integration for eps=', eps, 'completed with', n, 'iterations')
-    return res
-
-
-def its_a_trap(a, b, eps):
+def trapezoidal_integration(a, b, eps):
     h = m.sqrt(24 * eps / ddf(b))
     n = int((b - a) / h)
     res = 0.5 * (f(a) + f(b))
@@ -75,19 +87,11 @@ def run():
     eps = 10 ** -5
     simpson_n = 10
 
-    i = np.linspace(a, b, 100)
-
-    m2 = []
-    for j in range(100):
-        m2.append(ddf(i[j]))
-
-    pl.plot(i, m2)
-    pl.show()
-
     source_function_plot(a, b, simpson_n)
-    print('Trapezoidal result:', trapezoidal_integration_with_precision(a, b, eps), 'for eps=', eps)
-    print('Simpson result:', simpson_integration(a, b, simpson_n), 'for n=', simpson_n)
-    print('Trap, Just a trap:', its_a_trap(a, b, eps), 'for dick=', eps)
+    ddf_plot(a, b)
+    # print('Trapezoidal result:', trapezoidal_integration_with_precision(a, b, eps), 'for eps=', eps)
+    print('Trapezoidal result:', trapezoidal_integration(a, b, eps), 'for eps =', eps)
+    print('Simpson result:', simpson_integration(a, b, simpson_n), 'for n =', simpson_n)
 
 
 if __name__ == '__main__':
