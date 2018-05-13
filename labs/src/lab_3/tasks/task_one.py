@@ -7,6 +7,13 @@ def f(x):
     return m.exp(3 * x) / ((x ** 3) + m.sqrt(x + 1))
 
 
+def ddf(x):
+    return (9 * m.exp(3 * x)) / (x ** 3 + m.sqrt(x + 1)) - (
+            6 * m.exp(3 * x) * (3 * x ** 2 + 1 / (2 * m.sqrt(x + 1)))) / (x ** 3 + m.sqrt(x + 1)) ** 2 + m.exp(
+        3 * x) * ((2 * (3 * x ** 2 + 1 / (2 * m.sqrt(x + 1))) ** 2) / (x ** 3 + m.sqrt(x + 1)) ** 3 - (
+            6 * x - 1 / (4 * (x + 1) ** (3 / 2))) / (x ** 3 + m.sqrt(x + 1)) ** 2)
+
+
 def source_function_plot(a, b, n):
     pl.figure("Source function")
 
@@ -43,6 +50,15 @@ def trapezoidal_integration_with_precision(a, b, eps):
     return res
 
 
+def its_a_trap(a, b, eps):
+    h = m.sqrt(24 * eps / ddf(b))
+    n = int((b - a) / h)
+    res = 0.5 * (f(a) + f(b))
+    for i in range(1, n):
+        res += f(a + i * h)
+    return h * res
+
+
 def simpson_integration(a, b, n):
     h = (b - a) / n
     res = f(a) + f(b)
@@ -57,11 +73,21 @@ def run():
     a = 2
     b = 3
     eps = 10 ** -5
-    n = 10
+    simpson_n = 10
 
-    source_function_plot(a, b, n)
-    print('Trap. result:', trapezoidal_integration_with_precision(a, b, eps))
-    print('Simpson result:', simpson_integration(a, b, n))
+    i = np.linspace(a, b, 100)
+
+    m2 = []
+    for j in range(100):
+        m2.append(ddf(i[j]))
+
+    pl.plot(i, m2)
+    pl.show()
+
+    source_function_plot(a, b, simpson_n)
+    print('Trapezoidal result:', trapezoidal_integration_with_precision(a, b, eps), 'for eps=', eps)
+    print('Simpson result:', simpson_integration(a, b, simpson_n), 'for n=', simpson_n)
+    print('Trap, Just a trap:', its_a_trap(a, b, eps), 'for dick=', eps)
 
 
 if __name__ == '__main__':
