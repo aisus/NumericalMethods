@@ -13,51 +13,51 @@ def dx4_max(x):
     return abs((-15 * math.pi ** 5) / (2 * ((math.pi * x + 12) ** (7 / 2)))) / 24
 
 
-def finite2(x0, x1):
+def f2(x0, x1):
     return (f(x1) - f(x0)) / (x1 - x0)
 
 
-def finite3(x0, x1, x2):
-    return (finite2(x1, x2) - finite2(x0, x1)) / (x2 - x0)
+def f3(x0, x1, x2):
+    return (f2(x1, x2) - f2(x0, x1)) / (x2 - x0)
 
 
-def finite4(x0, x1, x2, x3):
-    return (finite3(x1, x2, x3) - finite3(x0, x1, x2)) / (x3 - x0)
+def f4(x0, x1, x2, x3):
+    return (f3(x1, x2, x3) - f3(x0, x1, x2)) / (x3 - x0)
 
 
-def step(a, b):  # находим шаг (параметры - какой нибудь начальный отрезок)
+def step(a, b):  # находим шаг
 
-    def maxfunc(x_, x0, h):  # |w_n+1|
+    def w_n_1(x_, x0, h):  # |w_n+1|
         return abs((x_ - x0) * (x_ - x0 - h) * (x_ - x0 - 2 * h) * (x_ - x0 - 3 * h))
 
-    def maxW_n_1(a, b, h):  # метод золотого сечения для поиска максимума
+    def max_func(a, b, h):  # метод для поиска максимума
         PHI = (np.sqrt(5) + 1) / 2
         while abs(b - a) >= 0.00001:
             x2 = a + (b - a) / PHI
             x1 = b - (b - a) / PHI
 
-            if abs(maxfunc(x1, x0, h)) <= (abs(maxfunc(x2, x0, h))):
+            if abs(w_n_1(x1, x0, h)) <= (abs(w_n_1(x2, x0, h))):
                 a = x1
             else:
-                if abs((maxfunc(x1, x0, h))) > (abs(maxfunc(x2, x0, h))):
+                if abs((w_n_1(x1, x0, h))) > (abs(w_n_1(x2, x0, h))):
                     b = x2
         return (a + b) / 2
 
     x3 = b  # правая граница
     x0 = a  # левая граница
     h = (x3 - x0) / 3  # шаг
-    R3 = 1  # погрешность
-    x_ = maxW_n_1(x0, x3, h)  # max x_ для |w_n+1|
+    r3 = 1  # погрешность
+    x_ = max_func(x0, x3, h)  # max x_ для |w_n+1|
 
-    max = dx4_max(b)  # само max |w_n+1|
+    max = dx4_max(b)
 
-    while abs(R3 / f(x_)) > 10 ** -3:
-        R3 = (max * (x_ - x0) * (x_ - x0 - h) * (x_ - x0 - 2 * h) * (x_ - x0 - 3 * h))
-        x0 = x0 + 0.01
+    while abs(r3 / f(x_)) > 10 ** -3:
+        r3 = (max * (x_ - x0) * (x_ - x0 - h) * (x_ - x0 - 2 * h) * (x_ - x0 - 3 * h))
+        x0 = x0 + 0.001
         h = (x3 - x0) / 3
-        x_ = maxW_n_1(x0, x3, h)
+        x_ = max_func(x0, x3, h)
 
-    # print("x0 = ", x0, "R3 = ", abs((R3 / f(x_))), "h  =", h)
+    print("x0 = ", x0, "r3 = ", abs((r3 / f(x_))), "h  =", h)
     return x0, h
 
 
@@ -72,7 +72,7 @@ def tabulated_function_values(a, b, h, xarr, out):
 
 def poly_plot(a, b, source, lag, newt):
     pl.figure("Polynomials")
-    pl.plot(np.linspace(a, b, len(source)), source, 'b', label='f(x)')
+    pl.plot(np.linspace(a, b, len(source)), source, 'b', label='f(x)', linestyle='--')
     pl.plot(np.linspace(a, b, len(lag)), lag, 'r', label='lagrange')
     pl.plot(np.linspace(a, b, len(newt)), newt, 'g', label='newton')
     pl.grid()
@@ -82,7 +82,7 @@ def poly_plot(a, b, source, lag, newt):
 
 def spline_plot(a, b, source, lin_sp, par_sp, cub_sp):
     pl.figure("Splines")
-    pl.plot(np.linspace(a, b, len(source)), source, 'b', label='f(x)')
+    pl.plot(np.linspace(a, b, len(source)), source, 'b', label='f(x)', linestyle='--')
     pl.plot(lin_sp[0], lin_sp[1], 'purple', label='linear spline')
     pl.plot(par_sp[0], par_sp[1], 'g', label='parabolic spline')
     pl.plot(cub_sp[0], cub_sp[1], 'gray', label='cubic spline')
@@ -95,6 +95,11 @@ def error_plot(lag, newt, lin, par, cub):
     pl.figure("Errors")
     pl.plot(lag[0], lag[1], 'purple', label='lagrange')
     pl.plot(newt[0], newt[1], 'g', label='newton')
+    pl.grid()
+    pl.legend()
+    pl.show()
+
+    pl.figure("Errors")
     pl.plot(lin[0], lin[1], 'b', label='linear spline')
     pl.plot(par[0], par[1], 'r', label='parabolic spline')
     pl.plot(cub[0], cub[1], 'gray', label='cubic spline')
@@ -117,9 +122,9 @@ def lagrange(x, x_arr):
 
 
 def newton(x, x_arr):
-    return f(x_arr[0]) + finite2(x_arr[0], x_arr[1]) * (x - x_arr[0]) + finite3(x_arr[0], x_arr[1], x_arr[2]) * (
+    return f(x_arr[0]) + f2(x_arr[0], x_arr[1]) * (x - x_arr[0]) + f3(x_arr[0], x_arr[1], x_arr[2]) * (
             x - x_arr[0]) * (
-                   x - x_arr[1]) + finite4(x_arr[0], x_arr[1], x_arr[2], x_arr[3]) * (x - x_arr[0]) * (x - x_arr[1]) * (
+                   x - x_arr[1]) + f4(x_arr[0], x_arr[1], x_arr[2], x_arr[3]) * (x - x_arr[0]) * (x - x_arr[1]) * (
                    x - x_arr[2])
 
 
@@ -238,7 +243,7 @@ def newton_error(x):
     while xi <= x[3]:
         y_err.append(abs(f(xi) - newton(xi, x)))
         x_err.append(xi)
-        xi = xi + 0.008
+        xi = xi + 0.0001
 
     return x_err, y_err
 
@@ -250,12 +255,12 @@ def lagrange_error(x):
     while xi <= x[3]:
         y_err.append(abs(f(xi) - lagrange(xi, x)))
         x_err.append(xi)
-        xi = xi + 0.006
+        xi = xi + 0.0001
 
     return x_err, y_err
 
 
-def spline_error(x, spline_xy):
+def spline_error(spline_xy):
     x_err = []
     y_err = []
     for i in range(0, len(spline_xy[0])):
@@ -288,20 +293,20 @@ def run():
         lag.append(lagrange(gg, x))
         newt.append(newton(gg, x))
         ggx.append(gg)
-        gg += 0.001
+        gg += 0.01
 
-    X_Y_parabol_sp = parabolSpline(x, y, h, 0.001)
-    X_Y_cub_sp = cubSpline(x, y, h, 0.001)
-    X_Y_lin_sp = linearSpline(x, y, h, 0.001)
+    x_y_parabol_sp = parabolSpline(x, y, h, 0.001)
+    x_y_cub_sp = cubSpline(x, y, h, 0.001)
+    x_y_lin_sp = linearSpline(x, y, h, 0.001)
 
     poly_plot(x[0], x[-1], y, lag, newt)
-    spline_plot(x[0], x[-1], y, X_Y_lin_sp, X_Y_parabol_sp, X_Y_cub_sp)
+    spline_plot(x[0], x[-1], y, x_y_lin_sp, x_y_parabol_sp, x_y_cub_sp)
 
     error_lagrange = lagrange_error(x)
     error_newton = newton_error(x)
-    error_lin = spline_error(x, X_Y_lin_sp)
-    error_parab = spline_error(x, X_Y_parabol_sp)
-    error_cub = spline_error(x, X_Y_cub_sp)
+    error_lin = spline_error(x_y_lin_sp)
+    error_parab = spline_error(x_y_parabol_sp)
+    error_cub = spline_error(x_y_cub_sp)
 
     error_plot(error_lagrange, error_newton, error_lin, error_parab, error_cub)
 

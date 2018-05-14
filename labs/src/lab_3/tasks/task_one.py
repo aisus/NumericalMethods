@@ -74,7 +74,7 @@ def trapezoidal_integration(a, b, eps):
 def simpson_integration(a, b, n):
     h = (b - a) / n
     res = f(a) + f(b)
-    for i in range(0, n, 2):
+    for i in range(0, n-1, 2):
         res += 2 * f(a + i * h)
     for i in range(1, n, 2):
         res += 4 * f(a + i * h)
