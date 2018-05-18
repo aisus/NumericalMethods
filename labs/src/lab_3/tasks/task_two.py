@@ -67,9 +67,6 @@ def forecast():
 
 
 def run():
-    y0 = 2
-    h = 0.1
-    eps = 10 ** -5
 
     runge2()
     runge3()

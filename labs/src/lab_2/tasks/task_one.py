@@ -4,13 +4,21 @@ from matplotlib import pyplot as pl
 
 
 def f(x):
-    return 8 * math.pi * (12 + math.pi * x) ** 0.5
-    # return x / 10 * math.pi * math.sin(x)
-    # return x
+    return 8 * np.pi * (12 + np.pi * x) ** 0.5
 
 
 def dx4_max(x):
-    return abs((-15 * math.pi ** 5) / (2 * ((math.pi * x + 12) ** (7 / 2)))) / 24
+    return (-15 * np.pi ** 5) / (2 * (12 + np.pi * x) ** (7 / 2))
+
+
+#
+# def f(x):
+#     return np.pi * (math.sin(8 * x) / x) + x ** 2
+#
+#
+# def dx4_max(x):
+#     return (8 * np.pi * (8 * x * (32 * x ** 2 - 3) * math.cos(8 * x) + (512 * x ** 4 - 96 * x ** 2 + 3) * math.sin(
+#         8 * x))) / x ** 5
 
 
 def f2(x0, x1):
@@ -25,17 +33,15 @@ def f4(x0, x1, x2, x3):
     return (f3(x1, x2, x3) - f3(x0, x1, x2)) / (x3 - x0)
 
 
-def step(a, b):  # находим шаг
-
+def contraction(a, b):
     def w_n_1(x_, x0, h):  # |w_n+1|
         return abs((x_ - x0) * (x_ - x0 - h) * (x_ - x0 - 2 * h) * (x_ - x0 - 3 * h))
 
-    def max_func(a, b, h):  # метод для поиска максимума
+    def max_w_n_1(a, b, h):
         PHI = (np.sqrt(5) + 1) / 2
-        while abs(b - a) >= 0.00001:
+        while abs(b - a) >= 10 ** (-5):
             x2 = a + (b - a) / PHI
             x1 = b - (b - a) / PHI
-
             if abs(w_n_1(x1, x0, h)) <= (abs(w_n_1(x2, x0, h))):
                 a = x1
             else:
@@ -43,21 +49,20 @@ def step(a, b):  # находим шаг
                     b = x2
         return (a + b) / 2
 
-    x3 = b  # правая граница
-    x0 = a  # левая граница
-    h = (x3 - x0) / 3  # шаг
-    r3 = 1  # погрешность
-    x_ = max_func(x0, x3, h)  # max x_ для |w_n+1|
-
-    max = dx4_max(b)
-
-    while abs(r3 / f(x_)) > 10 ** -3:
-        r3 = (max * (x_ - x0) * (x_ - x0 - h) * (x_ - x0 - 2 * h) * (x_ - x0 - 3 * h))
-        x0 = x0 + 0.001
+    x3 = b
+    x0 = a
+    h = (x3 - x0) / 3
+    eps = 1
+    x_ = max_w_n_1(x0, x3, h)  # |w_n+1|
+    max = abs(dx4_max(b)) / 24
+    # while abs(eps / f(x_)) >= 10 ** -4:
+    while abs(eps) >= 10 ** -4:
+        eps = (max * (x_ - x0) * (x_ - x0 - h) * (x_ - x0 - 2 * h) * (x_ - x0 - 3 * h))
+        x0 = x0 + 0.01
         h = (x3 - x0) / 3
-        x_ = max_func(x0, x3, h)
-
-    print("x0 = ", x0, "r3 = ", abs((r3 / f(x_))), "h  =", h)
+        x_ = max_w_n_1(x0, x3, h)
+    x0 = round(x0, 5)
+    print("x0 = ", x0, "eps = ", abs((eps / f(x_))), "h  =", h)
     return x0, h
 
 
@@ -274,10 +279,10 @@ def run():
     a = 0
     b = 3.5
 
-    temp = step(a, b)
+    # a = 0
+    # b = 2
 
-    a = temp[0]
-    h = temp[1]
+    a, h = contraction(a, b)
 
     x = []
     y = []
