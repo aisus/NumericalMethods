@@ -7,7 +7,7 @@ def f(x):
     return 8 * np.pi * (12 + np.pi * x) ** 0.5
 
 
-def dx4_max(x):
+def dx4(x):
     return (-15 * np.pi ** 5) / (2 * (12 + np.pi * x) ** (7 / 2))
 
 
@@ -16,7 +16,7 @@ def dx4_max(x):
 #     return np.pi * (math.sin(8 * x) / x) + x ** 2
 #
 #
-# def dx4_max(x):
+# def dx4(x):
 #     return (8 * np.pi * (8 * x * (32 * x ** 2 - 3) * math.cos(8 * x) + (512 * x ** 4 - 96 * x ** 2 + 3) * math.sin(
 #         8 * x))) / x ** 5
 
@@ -54,10 +54,9 @@ def contraction(a, b):
     h = (x3 - x0) / 3
     eps = 1
     x_ = max_w_n_1(x0, x3, h)  # |w_n+1|
-    max = abs(dx4_max(b)) / 24
-    # while abs(eps / f(x_)) >= 10 ** -4:
-    while abs(eps) >= 10 ** -4:
-        eps = (max * (x_ - x0) * (x_ - x0 - h) * (x_ - x0 - 2 * h) * (x_ - x0 - 3 * h))
+    max = abs(dx4(b)) / 24
+    while abs(eps / f(x_)) >= 10 ** -4:
+        eps = (max * x_)
         x0 = x0 + 0.01
         h = (x3 - x0) / 3
         x_ = max_w_n_1(x0, x3, h)
@@ -246,7 +245,7 @@ def newton_error(x):
     y_err = []
     xi = x[0]
     while xi <= x[3]:
-        y_err.append(abs(f(xi) - newton(xi, x)))
+        y_err.append(abs(f(xi) - newton(xi, x)) / f(xi))
         x_err.append(xi)
         xi = xi + 0.0001
 
@@ -258,7 +257,7 @@ def lagrange_error(x):
     y_err = []
     xi = x[0]
     while xi <= x[3]:
-        y_err.append(abs(f(xi) - lagrange(xi, x)))
+        y_err.append(abs(f(xi) - lagrange(xi, x)) / f(xi))
         x_err.append(xi)
         xi = xi + 0.0001
 
@@ -269,7 +268,7 @@ def spline_error(spline_xy):
     x_err = []
     y_err = []
     for i in range(0, len(spline_xy[0])):
-        y_err.append(abs(f(spline_xy[0][i]) - spline_xy[1][i]))
+        y_err.append(abs(f(spline_xy[0][i]) - spline_xy[1][i]) / f(spline_xy[0][i]))
         x_err.append(spline_xy[0][i])
 
     return x_err, y_err

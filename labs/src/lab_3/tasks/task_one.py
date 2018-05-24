@@ -38,10 +38,11 @@ def ddf_plot(a, b):
     for j in range(100):
         m2.append(ddf(i[j]))
 
-    pl.plot(i, m2, 'purple', label='ddf')
+    pl.plot(i, m2, 'red', label='ddf')
     pl.legend()
     pl.grid()
     pl.show()
+
 
 # def trapezoidal_integration(a, b, n):
 #     h = (b - a) / n
@@ -63,10 +64,10 @@ def ddf_plot(a, b):
 
 
 def trapezoidal_integration(a, b, eps):
-    h = m.sqrt(24 * eps / ddf(b))
+    h = m.sqrt(12 * eps / (ddf(b) * (b - a)))
     n = int((b - a) / h)
     res = 0.5 * (f(a) + f(b))
-    for i in range(1, n):
+    for i in range(1, n + 1):
         res += f(a + i * h)
     return h * res
 
@@ -74,7 +75,7 @@ def trapezoidal_integration(a, b, eps):
 def simpson_integration(a, b, n):
     h = (b - a) / n
     res = f(a) + f(b)
-    for i in range(0, n-1, 2):
+    for i in range(2, n - 1, 2):
         res += 2 * f(a + i * h)
     for i in range(1, n, 2):
         res += 4 * f(a + i * h)
@@ -89,7 +90,7 @@ def run():
 
     source_function_plot(a, b, simpson_n)
     ddf_plot(a, b)
-    # print('Trapezoidal result:', trapezoidal_integration_with_precision(a, b, eps), 'for eps=', eps)
+
     print('Trapezoidal result:', trapezoidal_integration(a, b, eps), 'for eps =', eps)
     print('Simpson result:', simpson_integration(a, b, simpson_n), 'for n =', simpson_n)
 
